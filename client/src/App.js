@@ -175,7 +175,7 @@ function App({ user, fetchUser }) {
                 <Typography>{user.name}</Typography>
               </Button>
               <Button color='inherit'>
-                <a href={`${baseUrl}/auth/logout`}>
+                <a href={`/auth/logout`}>
                   <Typography>Logout</Typography>
                 </a>
               </Button>
@@ -183,7 +183,7 @@ function App({ user, fetchUser }) {
           ) : (
             <Button color='inherit'>
               <GoogleIcon />
-              <a style={{ marginLeft: '5px' }} href={`${baseUrl}/auth/google`}>
+              <a style={{ marginLeft: '5px' }} href={`/auth/google`}>
                 <Typography>Login</Typography>
               </a>
             </Button>
