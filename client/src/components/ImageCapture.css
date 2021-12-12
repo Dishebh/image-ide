@@ -1,0 +1,5 @@
+.capture-image {
+  width: max(50%, 400px);
+  object-fit: contain;
+  margin: auto;
+}

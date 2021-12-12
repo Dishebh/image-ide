@@ -1,0 +1,31 @@
+h6 {
+  flex: 1;
+}
+
+button {
+  text-transform: none !important;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.avatar-button {
+  display: flex;
+  gap: 10px;
+}
+
+.avatar-button img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.active-item {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.main {
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+.text-editor {
+  text-align: left;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  flex: 1;
+}

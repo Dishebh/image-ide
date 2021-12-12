@@ -1,0 +1,32 @@
+.upload-image {
+  height: 500px;
+  width: 500px;
+  object-fit: contain;
+}
+
+.upload-button {
+  text-transform: none !important;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px !important;
+}
+
+.submit-btn {
+  margin-top: 10px;
+}
+
+.editor {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 500px) {
+  .editor {
+    flex-direction: column;
+  }
+}

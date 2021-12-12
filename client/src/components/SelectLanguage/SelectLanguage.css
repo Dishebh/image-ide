@@ -1,0 +1,8 @@
+.select-language {
+  margin-bottom: 20px;
+  min-width: 50%;
+}
+
+.select-language .MuiSelect-select {
+  text-align: left;
+}
