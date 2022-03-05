@@ -1,0 +1,36 @@
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/theme/material.css';
+@import 'codemirror/addon/fold/foldgutter.css';
+@import 'codemirror/addon/display/fullscreen.css';
+/* import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap'); */
+
+.CodeMirror {
+  height: 83vh;
+  width: 90vw;
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: medium;
+}
+
+.CodeMirror-hints {
+  background-color: white;
+  list-style: none;
+  margin-left: 0;
+  cursor: pointer;
+  position: absolute;
+}
+
+#language-select {
+  color: #eeeeed;
+  width: 20vw;
+}
+
+.sidebar {
+  position: absolute !important;
+  height: 83vh;
+  width: 30%;
+  top: 11.8vh !important;
+  right: 5vw !important;
+  border-bottom-right-radius: 3.5px;
+}

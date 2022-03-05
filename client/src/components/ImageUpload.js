@@ -1,5 +1,5 @@
 import { Button, Typography } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { fetchText } from '../actions';
 import './ImageUpload.css';
@@ -10,10 +10,8 @@ import {
   FETCH_TEXT_SUCCESS,
   REMOVE_TEXT,
 } from '../actions/types';
-import TextEditor from './TextEditor/TextEditor';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import Output from './Output/Output';
 
 const ImageThumb = ({ image }) => {
   return (
@@ -32,8 +30,10 @@ function ImageUpload({ fetchText, text, isTextLoading, language }) {
   const dispatch = useDispatch();
 
   const [file, setFile] = useState('');
+  const [encodedImage, setEncodedImage] = useState('');
 
   function handleUpload(e) {
+    console.log('e!!', e.target.files);
     e.target.files.length > 0 && setFile(e.target.files[0]);
   }
 
@@ -43,27 +43,49 @@ function ImageUpload({ fetchText, text, isTextLoading, language }) {
     editor.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function encodeImageFileAsURL(file) {
+    const reader = new FileReader();
+    reader.onloadend = async function () {
+      // console.log('RESULT', reader.result);
+      setEncodedImage(reader.result.split(',')[1]);
+      await fetchText(reader.result.split(',')[1]);
+      window.open('/editor');
+    };
+    reader.readAsDataURL(file);
+  }
+
   function removeImage() {
     setFile('');
+    localStorage.removeItem('code');
+    localStorage.removeItem('language');
     dispatch({ type: REMOVE_TEXT });
   }
 
   async function sendImage() {
     dispatch({ type: FETCH_TEXT });
 
-    const image = URL.createObjectURL(file);
+    // const image = URL.createObjectURL(file);
 
-    Tesseract.recognize(image, 'eng', {
-      // logger: (m) => console.log(m)
-    })
-      .then(({ data: { text } }) => {
-        // console.log(text);
-        dispatch({ type: FETCH_TEXT_SUCCESS, payload: text });
-        scrollToEditor();
-      })
-      .catch((e) => {
-        dispatch({ type: FETCH_ERROR });
-      });
+    encodeImageFileAsURL(file);
+
+    // console.log({ encodedImage });
+
+    // await fetchText(encodedImage);
+    // window.open('/editor');
+
+    // Tesseract.recognize(image, 'eng', {
+    //   // logger: (m) => console.log(m)
+    // })
+    //   .then(({ data: { text } }) => {
+    //     // console.log(text);
+    //     localStorage.setItem('code', text);
+    //     dispatch({ type: FETCH_TEXT_SUCCESS, payload: text });
+    //     // scrollToEditor();
+    //     window.open('/editor');
+    //   })
+    //   .catch((e) => {
+    //     dispatch({ type: FETCH_ERROR });
+    //   });
   }
 
   return (
@@ -83,7 +105,13 @@ function ImageUpload({ fetchText, text, isTextLoading, language }) {
           onClick={file !== '' ? removeImage : () => {}}
         >
           {file === '' ? 'Upload Image' : 'Upload another image'}
-          <input hidden accept='image/' type='file' onChange={handleUpload} />
+          <input
+            hidden
+            accept='image/'
+            type='file'
+            onChange={handleUpload}
+            onClick={handleUpload}
+          />
         </Button>
         <Button
           disabled={file === '' ? true : false}
@@ -111,12 +139,15 @@ function ImageUpload({ fetchText, text, isTextLoading, language }) {
           Submit
         </Button>
       </div>
-      {text.length > 0 && (
-        <div className='editor'>
-          <TextEditor />
-          <Output />
-        </div>
-      )}
+      {
+        // text.length > 0 && handleOpenEditor()
+        // text.length > 0 && window.open('/editor')
+        // <div>
+        //   <CodeEditor />
+        //   {/* <TextEditor /> */}
+        //   {/* <Output /> */}
+        // </div>
+      }
     </div>
   );
 }

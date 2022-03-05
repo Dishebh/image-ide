@@ -27,6 +27,9 @@ import StayCurrentLandscapeIcon from '@mui/icons-material/StayCurrentLandscape';
 import HistoryIcon from '@mui/icons-material/History';
 import GoogleIcon from '@mui/icons-material/Google';
 import SelectLanguage from './components/SelectLanguage/SelectLanguage';
+import CodeIcon from '@mui/icons-material/Code';
+import InfoIcon from '@mui/icons-material/Info';
+import About from './components/About/About';
 
 const drawerWidth = 240;
 
@@ -99,6 +102,8 @@ const useStyles = makeStyles((theme) => ({
 
 const renderComponent = (activeItem) => {
   switch (activeItem) {
+    case 'About Us':
+      return <About />;
     case 'Upload Image':
       return (
         <div>
@@ -115,10 +120,14 @@ const renderComponent = (activeItem) => {
 
 const renderListIcon = (text) => {
   switch (text) {
+    case 'About Us':
+      return <InfoIcon />;
     case 'Upload Image':
       return <UploadFileIcon />;
     case 'Capture Image':
       return <StayCurrentLandscapeIcon />;
+    case 'Code Editor':
+      return <CodeIcon />;
     case 'History':
       return <HistoryIcon />;
     default:
@@ -142,6 +151,17 @@ function App({ user, fetchUser }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleListItemClick = (text) => {
+    if (text === 'Code Editor') {
+      localStorage.removeItem(`code`);
+      localStorage.removeItem(`language`);
+      window.open('/editor');
+      return;
+    }
+
+    setActiveItem(text);
   };
 
   return (
@@ -214,11 +234,17 @@ function App({ user, fetchUser }) {
         </div>
         <Divider />
         <List>
-          {['Upload Image', 'Capture Image', 'History'].map((text, index) => (
+          {[
+            'About Us',
+            'Upload Image',
+            'Capture Image',
+            'Code Editor',
+            'History',
+          ].map((text, index) => (
             <Tooltip key={text} title={text}>
               <ListItem
                 className={text === activeItem ? 'active-item' : ''}
-                onClick={() => setActiveItem(text)}
+                onClick={() => handleListItemClick(text)}
                 button
                 key={text}
                 disabled={text === 'History' && !Object.keys(user).length}

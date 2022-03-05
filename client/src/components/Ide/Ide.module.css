@@ -1,0 +1,99 @@
+.ide {
+  text-align: left;
+  flex-grow: 1;
+  width: 100%;
+}
+.header {
+  width: 100%;
+  height: 7vh;
+  background-color: #212121;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.heading {
+  color: #eeeeed;
+  padding-left: 3%;
+}
+
+.selectLanguage {
+  color: #eeeeed !important;
+  width: 20vw;
+  height: 50%;
+}
+
+.selectLanguage * {
+  color: #eeeeed !important;
+}
+
+.dropdown * {
+  color: #eeeeed !important;
+}
+/* .MuiSelect-icon {
+  color: #eeeeed !important;
+}
+.MuiSelect-nativeInput {
+  opacity: 1 !important;
+  color: #eeeeed;
+  border: none;
+  background-color: transparent;
+  font-family: 'Quicksand', sans-serif;
+  font-size: large;
+} */
+/* .MuiFormLabel-root {
+  color: #eeeeed !important;
+}
+.MuiFormLabel-root.Mui-focused {
+  color: #3f51b5 !important;
+} */
+.CodeMirror {
+  height: 83vh;
+  width: 90vw;
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: medium;
+}
+.fabRoot {
+  position: absolute !important;
+  bottom: 10%;
+  right: 8%;
+}
+/* .MuiFab-root {
+  position: absolute !important;
+  bottom: 10%;
+  right: 8%;
+} */
+.sidebar {
+  position: absolute !important;
+  height: 83vh;
+  width: 30%;
+  top: 11.8vh !important;
+  right: 5vw !important;
+  border-bottom-right-radius: 3.5px;
+}
+.close {
+  color: #3f51b5;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+.outputFormatting {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+.inputField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.CodeMirror-hints {
+  background-color: white;
+  list-style: none;
+  margin-left: 0;
+  cursor: pointer;
+  position: absolute;
+}

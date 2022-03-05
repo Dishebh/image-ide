@@ -7,12 +7,21 @@ import reducers from './reducers';
 import logger from 'redux-logger';
 import App from './App';
 import './index.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import CodeEditor from './components/CodeEditor/CodeEditor';
 
 const store = createStore(reducers, {}, applyMiddleware(...[thunk, logger]));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route exact path='/'>
+        <App />
+      </Route>
+      <Route exact path='/editor'>
+        <CodeEditor />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

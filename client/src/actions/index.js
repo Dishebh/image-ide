@@ -25,11 +25,19 @@ export const fetchText = (image) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_TEXT });
 
-    const res = await axios.post('/api/get_text', {
-      data: image,
-    });
+    const options = {
+      method: 'POST',
+      url: 'https://image-ide-vision-api.herokuapp.com/get_code',
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        input_image: image,
+      },
+    };
 
-    dispatch({ type: FETCH_TEXT_SUCCESS, payload: res.data });
+    const res = await axios.request(options);
+
+    localStorage.setItem('code', res.data.Text);
+    dispatch({ type: FETCH_TEXT_SUCCESS, payload: res.data.Text });
   } catch (error) {
     console.log(error);
     dispatch({
