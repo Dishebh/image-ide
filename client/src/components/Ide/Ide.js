@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Controlled as ControlledEditor } from 'react-codemirror2';
+import { Controlled as ControlledEditor } from 'react-codemirror2-react-17';
 import {
   Typography,
   Select,

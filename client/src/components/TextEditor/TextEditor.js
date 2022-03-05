@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fetchCode } from '../../actions';
-import { Controlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2-react-17';
 import { connect } from 'react-redux';
 import './TextEditor.css';
 
