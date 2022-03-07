@@ -57,7 +57,7 @@ function ImageUpload({ fetchText, text, isTextLoading, language }) {
   function removeImage() {
     setFile('');
     localStorage.removeItem('code');
-    localStorage.removeItem('language');
+
     dispatch({ type: REMOVE_TEXT });
   }
 
