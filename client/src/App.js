@@ -24,12 +24,13 @@ import { connect } from 'react-redux';
 import ImageCapture from './components/ImageCapture';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import StayCurrentLandscapeIcon from '@mui/icons-material/StayCurrentLandscape';
-import HistoryIcon from '@mui/icons-material/History';
 import GoogleIcon from '@mui/icons-material/Google';
 import SelectLanguage from './components/SelectLanguage/SelectLanguage';
 import CodeIcon from '@mui/icons-material/Code';
 import InfoIcon from '@mui/icons-material/Info';
 import About from './components/About/About';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import Analytics from './components/Analytics/Analytics';
 
 const drawerWidth = 240;
 
@@ -118,6 +119,8 @@ const renderComponent = (activeItem) => {
           <ImageCapture />
         </div>
       );
+    case 'Analytics':
+      return <Analytics />;
     default:
       return <></>;
   }
@@ -133,8 +136,8 @@ const renderListIcon = (text) => {
       return <StayCurrentLandscapeIcon />;
     case 'Code Editor':
       return <CodeIcon />;
-    case 'History':
-      return <HistoryIcon />;
+    case 'Analytics':
+      return <AnalyticsIcon />;
     default:
       return <MailIcon />;
   }
@@ -244,7 +247,7 @@ function App({ user, fetchUser }) {
             'Upload Image',
             'Capture Image',
             'Code Editor',
-            'History',
+            'Analytics',
           ].map((text, index) => (
             <Tooltip key={text} title={text}>
               <ListItem
@@ -252,7 +255,6 @@ function App({ user, fetchUser }) {
                 onClick={() => handleListItemClick(text)}
                 button
                 key={text}
-                disabled={text === 'History' && !Object.keys(user).length}
               >
                 <ListItemIcon>{renderListIcon(text)}</ListItemIcon>
                 <ListItemText primary={text} />
