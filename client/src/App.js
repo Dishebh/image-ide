@@ -112,7 +112,12 @@ const renderComponent = (activeItem) => {
         </div>
       );
     case 'Capture Image':
-      return <ImageCapture />;
+      return (
+        <div>
+          <SelectLanguage />
+          <ImageCapture />
+        </div>
+      );
     default:
       return <></>;
   }

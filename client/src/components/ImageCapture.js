@@ -1,15 +1,25 @@
 import { Button, Typography } from '@material-ui/core';
 import { useCallback, useRef, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import Webcam from 'react-webcam';
 import './ImageCapture.css';
+import { FETCH_TEXT } from '../actions/types';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { fetchText } from '../actions';
 
-function ImageCapture() {
+function ImageCapture({ isTextLoading, fetchText, language }) {
+  const dispatch = useDispatch();
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
+  const [file, setFile] = useState('');
 
   const capture = useCallback(() => {
     const image = webcamRef.current.getScreenshot();
     setImgSrc(image);
+    setFile(image);
+    console.log({ image });
+    // convertToFileType(image);
   }, [webcamRef, setImgSrc]);
 
   const videoConstraints = {
@@ -18,8 +28,25 @@ function ImageCapture() {
     facingMode: 'environment',
   };
 
+  async function encodeImageFileAsURL(file) {
+    console.log('file gfrom capture', file.split(',')[1]);
+    await fetchText(file.split(',')[1]);
+    window.open('/editor');
+  }
+
+  async function sendImage() {
+    dispatch({ type: FETCH_TEXT });
+    encodeImageFileAsURL(file);
+  }
+
   return (
     <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isTextLoading}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
       <div className='button-container'>
         <Button
           color='primary'
@@ -59,8 +86,9 @@ function ImageCapture() {
       <div className='submit-btn'>
         <Button
           colo='primary'
-          disabled={imgSrc === null ? true : false}
+          disabled={file === '' || language === '' ? true : false}
           variant='contained'
+          onClick={sendImage}
         >
           Submit
         </Button>
@@ -69,4 +97,9 @@ function ImageCapture() {
   );
 }
 
-export default ImageCapture;
+const mapStateToProps = (state) => ({
+  isTextLoading: state.text.isTextLoading,
+  language: state.text.language,
+});
+
+export default connect(mapStateToProps, { fetchText })(ImageCapture);
